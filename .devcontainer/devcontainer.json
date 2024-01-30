@@ -1,7 +1,7 @@
 {
     "name": "Java",
-    "image": "docker.io/rliechti137/trials:1",
-    "postCreateCommand": "echo 'foo bar2'",
+    "image": "docker.io/bosschaert/rde_dc:4",
+    "postCreateCommand": "echo 'foo bar 3'",
     "customizations": {
         "vscode": {
             "extensions": [
