@@ -1,0 +1,12 @@
+{
+    "name": "Java",
+    "image": "mcr.microsoft.com/devcontainers/java:11-bullseye",
+    "postCreateCommand": "echo 'foo bar'",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vscjava.vscode-java-pack"
+            ]
+        }
+    },
+}
