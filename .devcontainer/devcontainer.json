@@ -1,7 +1,7 @@
 {
     "name": "Java",
-    "image": "mcr.microsoft.com/devcontainers/java:11-bullseye",
-    "postCreateCommand": "echo 'foo bar'",
+    "image": "rliechti137/trials:1",
+    "postCreateCommand": "echo 'foo bar2'",
     "customizations": {
         "vscode": {
             "extensions": [
