@@ -31,6 +31,7 @@ RUN sudo apt-get -y install debian-keyring debian-archive-keyring apt-transport-
     sudo mkdir -p /var/lib/envoy
 
 COPY envoy /var/lib/envoy
+RUN sudo chmod +x /var/lib/envoy/init.sh
 
 # JAVA_HOME is incorrectly set, unset it
 ENV JAVA_HOME=
