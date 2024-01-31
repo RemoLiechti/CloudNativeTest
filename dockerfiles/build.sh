@@ -1,0 +1,1 @@
+docker build --push --platform linux/amd64 --tag  rliechti137/trials:1 .
