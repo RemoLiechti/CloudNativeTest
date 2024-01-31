@@ -1,0 +1,48 @@
+resources:
+  - name: cluster_0
+    "@type": type.googleapis.com/envoy.config.cluster.v3.Cluster
+    type: logical_dns
+    typed_extension_protocol_options:
+      envoy.extensions.upstreams.http.v3.HttpProtocolOptions:
+        "@type": type.googleapis.com/envoy.extensions.upstreams.http.v3.HttpProtocolOptions
+        common_http_protocol_options:
+          idle_timeout: 7200s
+        explicit_http_config:
+          http2_protocol_options:
+            connection_keepalive:
+              interval: 30s
+              timeout: 5s
+    respect_dns_ttl: true
+    connect_timeout: 5s
+    upstream_connection_options:
+      # configure a TCP keep-alive to detect and reconnect in the event of a TCP socket half open connection
+      # doesn't seem to prevent the closing of the stream
+      tcp_keepalive:
+        keepalive_probes: 3
+        keepalive_time: 120
+        keepalive_interval: 30
+    load_assignment:
+      cluster_name: cluster_0
+      endpoints:
+        - lb_endpoints:
+            - endpoint:
+                address:
+                  socket_address:
+                    address: author-cm-p84002-e204941-ns-team-aem-cm-stg-n86207-debug.corp.ethos15-stage-va7.ethos.adobe.net
+                    port_value: 443
+    transport_socket:
+      name: envoy.transport_sockets.tls
+      typed_config:
+        "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.UpstreamTlsContext
+        sni: author-cm-p84002-e204941-ns-team-aem-cm-stg-n86207-debug.corp.ethos15-stage-va7.ethos.adobe.net
+        common_tls_context:
+          tls_certificate_sds_secret_configs:
+            - name: upstream_cert
+              sds_config:
+                path: /var/lib/envoy/sds.yaml
+          tls_params:
+            tls_minimum_protocol_version: TLSv1_2
+          validation_context_sds_secret_config:
+            name: upstream_cert_ca
+            sds_config:
+              path: /var/lib/envoy/sds-ca.yaml

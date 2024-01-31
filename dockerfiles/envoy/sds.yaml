@@ -1,0 +1,9 @@
+resources:
+  - "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.Secret
+    name: upstream_cert
+    tls_certificate:
+      certificate_chain:
+        filename: "/etc/envoy/certs/tls.crt"
+      private_key:
+        filename: "/etc/envoy/certs/tls.key"
+

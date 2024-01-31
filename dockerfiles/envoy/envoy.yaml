@@ -1,0 +1,30 @@
+node:
+  cluster: envoy-sidecar
+  id: envoy-sidecar
+dynamic_resources:
+  cds_config:
+    resource_api_version: V3
+    path_config_source:
+      path: /var/lib/envoy/cds.yaml
+  lds_config:
+    resource_api_version: V3
+    path_config_source:
+      path: /var/lib/envoy/lds.yaml
+admin:
+  access_log:
+    - name: envoy.access_loggers.file
+      typed_config:
+        "@type": type.googleapis.com/envoy.extensions.access_loggers.file.v3.FileAccessLog
+        path: /var/log/envoy_admin_access.log
+  address:
+    socket_address:
+      protocol: TCP
+      address: 0.0.0.0
+      port_value: 9901
+
+layered_runtime:
+  layers:
+  - name: static_layer_0
+    static_layer:
+      overload:
+        global_downstream_max_connections: 2048

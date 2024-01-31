@@ -1,0 +1,7 @@
+resources:
+  - "@type": type.googleapis.com/envoy.extensions.transport_sockets.tls.v3.Secret
+    name: upstream_cert_ca
+    validation_context:
+      trusted_ca:
+        filename: "/etc/envoy/certs/ca.crt"
+
